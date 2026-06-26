@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from raphael_audit.core.event_builder import build_event
-from raphael_audit.schema.validator import validate_addon_snapshot
+from raphael_artifacts.calliope_schema.validator import validate_addon_snapshot
 
 
 class SolidWorksAdapter:
