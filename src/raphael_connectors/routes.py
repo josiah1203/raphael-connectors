@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter
+from typing import Any
+
+from fastapi import APIRouter, Request
 
 from raphael_connectors.store import ConnectorsStore
 
@@ -18,3 +20,10 @@ def list_connectors() -> dict:
 @router.post("/{tool}/connect")
 def connect(tool: str) -> dict:
     return _store.connect(tool)
+
+
+@router.post("/webhooks/{tool}")
+async def webhook(tool: str, request: Request) -> dict[str, str]:
+    body = await request.json()
+    _store.ingest_event({"tool": tool, **body})
+    return {"status": "accepted", "tool": tool}

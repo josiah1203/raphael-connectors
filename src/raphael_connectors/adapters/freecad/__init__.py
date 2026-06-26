@@ -1,0 +1,1 @@
+"""FreeCAD adapter package."""
